@@ -13,10 +13,14 @@ public class FileCreator {
         this.absolutePath = absolutePath;
     }
 
-    public File createFileJoke() {
-        JokeFile jokeFile1 = new JokeFile();
-        String fileName = jokeFile1.getFileName();
-        String content = jokeFile1.getContent();
+    public String getAbsolutePath() {
+        return absolutePath;
+    }
+
+    public void createFileJoke(String absolutePath) {
+        JokeFile jokeFile = new JokeFile();
+        String fileName = jokeFile.getFileName();
+        String content = jokeFile.getContent();
 
         File fileJoke = new File(absolutePath, fileName);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileJoke))) {
@@ -25,6 +29,14 @@ public class FileCreator {
         } catch (IOException e) {
             System.out.println("Ошибка при создании файла: " + e.getMessage());
         }
-        return fileJoke;
+
+        if (absolutePath == null) {
+            return;
+        }
+        File parentDir = fileJoke.getParentFile();
+        if (parentDir != null && parentDir.getParent() != null) {
+            createFileJoke(parentDir.toString());
+        }
     }
 }
+
