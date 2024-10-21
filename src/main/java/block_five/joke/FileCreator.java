@@ -13,9 +13,15 @@ public class FileCreator {
         this.absolutePath = absolutePath;
     }
 
+    public String getParentDir(String absolutePath) {
+        File file = new File(absolutePath);
+        return file.getParent();
+    }
+
     public String getAbsolutePath() {
         return absolutePath;
     }
+
 
     public void createFileJoke(String absolutePath) {
         JokeFile jokeFile = new JokeFile();
@@ -30,13 +36,9 @@ public class FileCreator {
             System.out.println("Ошибка при создании файла: " + e.getMessage());
         }
 
-        if (absolutePath == null) {
-            return;
-        }
-        File parentDir = fileJoke.getParentFile();
-        if (parentDir != null && parentDir.getParent() != null) {
-            createFileJoke(parentDir.toString());
+        String parentDir = getParentDir(absolutePath);
+        if (parentDir != null) {
+            createFileJoke(parentDir);
         }
     }
 }
-
