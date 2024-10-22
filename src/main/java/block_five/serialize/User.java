@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     @Serial
-    private static final long serialVersionUID = 1L; // Рекомендуется для обеспечения совместимости
+    private static final long serialVersionUID = 1L;
     private String name;
     private int age;
 
@@ -27,4 +27,3 @@ public class User implements Serializable {
         return "User{name='" + name + "', age=" + age + "}";
     }
 }
-

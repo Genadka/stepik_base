@@ -6,18 +6,18 @@ public class Main {
         User user2 = new User("Bob", 25);
 
         String userFilename = "user.ser";
-        UserSerializer.serializeUser(user1, userFilename);
+        Serializer.serialize(user1, userFilename);
 
-        User deserializedUser = UserDeserializer.deserializeUser(userFilename);
+        User deserializedUser = (User) Deserializer.deserialize(userFilename);
         System.out.println(deserializedUser);
 
         User[] userArray = {user1, user2};
         UserList userList = new UserList(userArray);
 
         String userListFilename = "userList.ser";
-        UserListSerializer.serializeUserList(userList, userListFilename);
+        Serializer.serialize(userList, userListFilename);
 
-        UserList deserializedUserList = UserListDeserializer.deserializeUserList(userListFilename);
+        UserList deserializedUserList = (UserList) Deserializer.deserialize(userListFilename);
         for (User user : deserializedUserList.getUsers()) {
             System.out.println(user);
         }
